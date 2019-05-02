@@ -17,12 +17,20 @@ spec:
         version: 1.0.0
     spec:
       containers:
-      - name: scalable-srv
-        image: khaosdoctor/scalable-node-api
-        env:
-        - name: PORT
-          value: "8080"
-        ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
+        - name: scalable-srv
+          image: khaosdoctor/scalable-node-api
+          env:
+            - name: PORT
+              value: "8080"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
