@@ -37,6 +37,10 @@ metadata:
     version: 1.0.0
 spec:
   replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: "10%"
+      maxUnavailable: "50%"
   selector:
     matchLabels:
       app: scalable-api
@@ -48,7 +52,7 @@ spec:
     spec:
       containers:
         - name: scalable-srv
-          image: khaosdoctor/scalable-node-api
+          image: khaosdoctor/scalable-node-api:1.0.0
           env:
             - name: PORT
               value: "8080"
